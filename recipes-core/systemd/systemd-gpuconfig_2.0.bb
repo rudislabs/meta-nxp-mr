@@ -29,6 +29,9 @@ do_install () {
 
 FILES:${PN} = "${systemd_unitdir}/system/*.service ${sysconfdir}"
 
+# Only for i.MX95 NavQ machines - patches GNOME/Wayland for i.MX95 GPU
+COMPATIBLE_MACHINE = "(imx95-navq.*)"
+
 # As this package is tied to systemd, only build it when we're also building systemd.
 python () {
     if not bb.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d):
