@@ -1,5 +1,5 @@
 # NXP i.MX SOC extra configuration udev rules
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}/${MACHINE}:${THISDIR}/${PN}:"
 
 do_install:append () {
     # LDP release, we only need install NXP specific blacklist as blacklist-nxp.conf

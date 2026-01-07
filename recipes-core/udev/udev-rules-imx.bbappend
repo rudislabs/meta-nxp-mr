@@ -4,6 +4,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI += " file://99-rpmsg.rules \
 	file://99-gpio.rules \
 	file://99-spi.rules \
+	file://99-bluetooth.rules \
 	"
 
 do_install:append () {
