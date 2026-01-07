@@ -1,0 +1,8 @@
+# Netplan configuration for NavQ95 (imx95-navq)
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enP2p0s8f0:
+      addresses:
+        - 192.0.2.2/24
