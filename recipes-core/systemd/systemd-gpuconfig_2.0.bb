@@ -17,10 +17,10 @@ do_install () {
     install -d ${D}${systemd_unitdir}/system/
     install -d ${D}${sysconfdir}/systemd/system/graphical.target.wants/
 
-    install -m 0755 ${WORKDIR}/gpuconfig ${D}${sysconfdir}
-    install -m 0644 ${WORKDIR}/gpuconfig.service ${D}${systemd_unitdir}/system
+    install -m 0755 ${S}/gpuconfig ${D}${sysconfdir}
+    install -m 0644 ${S}/gpuconfig.service ${D}${systemd_unitdir}/system
 
-    install -Dm0755 ${WORKDIR}/profile ${D}${sysconfdir}/profile.d/gpuconfig.sh
+    install -Dm0755 ${S}/profile ${D}${sysconfdir}/profile.d/gpuconfig.sh
 
     # Enable the gpuconfig.service
     ln -sf ${systemd_unitdir}/system/gpuconfig.service \
