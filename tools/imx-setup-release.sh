@@ -162,8 +162,12 @@ hook_in_layer meta-nxp-demo-experience
 hook_in_layer meta-nxp-connectivity/meta-nxp-matter-baseline
 hook_in_layer meta-nxp-connectivity/meta-nxp-openthread
 hook_in_layer meta-nxp-mr
-hook_in_layer meta-zephyr/meta-zephyr-core
-hook_in_layer meta-zephyr/meta-zephyr-bsp
+
+# Only add meta-zephyr for NavQ95 machines (has M7 core)
+if [[ "$MACHINE" == imx95-navq* ]]; then
+    hook_in_layer meta-zephyr/meta-zephyr-core
+    hook_in_layer meta-zephyr/meta-zephyr-bsp
+fi
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-arm/meta-arm\"" >> $BUILD_DIR/conf/bblayers.conf
