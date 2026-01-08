@@ -1,5 +1,6 @@
 SUMMARY = "MCUBoot"
 DESCRIPTION = "A bootloader called MCUBoot running on zephyr"
+LICENSE = "Apache-2.0"
 
 PREFERRED_VERSION_zephyr-kernel = "4.3.0"
 include recipes-kernel/zephyr-kernel/zephyr-sample.inc
