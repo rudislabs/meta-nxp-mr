@@ -154,6 +154,7 @@ META_FSL_BSP_RELEASE="${CWD}/sources/meta-imx/meta-imx-bsp"
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "# i.MX Yocto Project Release layers" >> $BUILD_DIR/conf/bblayers.conf
+hook_in_layer meta-freescale-ml
 hook_in_layer meta-imx/meta-imx-bsp
 hook_in_layer meta-imx/meta-imx-sdk
 hook_in_layer meta-imx/meta-imx-ml
@@ -162,8 +163,12 @@ hook_in_layer meta-nxp-demo-experience
 hook_in_layer meta-nxp-connectivity/meta-nxp-matter-baseline
 hook_in_layer meta-nxp-connectivity/meta-nxp-openthread
 hook_in_layer meta-nxp-mr
-hook_in_layer meta-zephyr/meta-zephyr-core
-hook_in_layer meta-zephyr/meta-zephyr-bsp
+
+# Only add meta-zephyr for NavQ95 machines (has M7 core)
+if [[ "$MACHINE" == imx95-navq* ]]; then
+    hook_in_layer meta-zephyr/meta-zephyr-core
+    hook_in_layer meta-zephyr/meta-zephyr-bsp
+fi
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-arm/meta-arm\"" >> $BUILD_DIR/conf/bblayers.conf
@@ -172,6 +177,7 @@ echo "BBLAYERS += \"\${BSPDIR}/sources/meta-clang\"" >> $BUILD_DIR/conf/bblayers
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-gnome\"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-networking\"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-filesystems\"" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-perl\"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-qt6\"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-security/meta-parsec\"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-security/meta-tpm\"" >> $BUILD_DIR/conf/bblayers.conf
