@@ -184,6 +184,6 @@ python prep_xattr_postinst() {
 }
 PACKAGEFUNCS =+ "prep_xattr_postinst"
 
-COMPATIBLE_MACHINE = "ubuntu"
+COMPATIBLE_MACHINE = "(.*ubuntu)"
 
 ERROR_QA:remove = "mime mime-xdg"

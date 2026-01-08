@@ -166,6 +166,10 @@ xcb-proto-dev xf86-input-libinput xkeyboard-config xkeyboard-config-dev  \
 xorgproto-dev xrandr-dev xserver-xf86-config xtrans-dev zstd \
 xz \
 "
+# Yocto grep/findutils/sed conflict with Ubuntu versions due to update-alternatives
+YOCTO-DEPENDS-LIST:append = " \
+    grep sed findutils findutils-xargs \
+"
 
 RCONFLICTS:${PN}-base = " ${YOCTO-DEPENDS-LIST} "
 RCONFLICTS:${PN}-ubuntu-base = " ${YOCTO-DEPENDS-LIST} "
@@ -223,7 +227,9 @@ APTGET_EXTRA_PACKAGES += " \
     libepoxy0 \
     libxcb-dri2-0 \
     x11-xkb-utils \
+    grep \
     sed \
+    findutils \
     seatd \
     python3-spidev \
     python3-libgpiod \
