@@ -1,0 +1,11 @@
+# Allow users in bluetooth group to access HCI devices without sudo
+# Needed for RemoteID and other Bluetooth applications
+
+# Bluetooth HCI devices
+KERNEL=="hci[0-9]*", SUBSYSTEM=="bluetooth", GROUP="bluetooth", MODE="0660"
+
+# rfkill for Bluetooth
+SUBSYSTEM=="rfkill", ATTR{type}=="bluetooth", GROUP="bluetooth", MODE="0660"
+
+# Bluetooth raw HCI socket capability (for legacy apps)
+KERNEL=="rfkill", GROUP="bluetooth", MODE="0660"
