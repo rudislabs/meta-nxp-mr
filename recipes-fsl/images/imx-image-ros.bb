@@ -14,7 +14,8 @@ IMAGE_INSTALL += "\
 ROS_VERSION = "jazzy"
 APTGET_ROS_APT_SOURCE = "noble"
 
-ROS_PACKAGES = "  \
+# Build tools and utilities
+BUILD_TOOLS = " \
     autoconf \
     automake \
     bc \
@@ -23,7 +24,6 @@ ROS_PACKAGES = "  \
     build-essential \
     bzip2 \
     ca-certificates \
-    can-utils \
     ccache \
     cmake \
     cppcheck \
@@ -38,12 +38,24 @@ ROS_PACKAGES = "  \
     git \
     gosu \
     gperf \
-    gstreamer1.0-nice \
-    gstreamer1.0-opencv \
-    htop \
-    iperf \
-    iw \
     lcov \
+    libtool \
+    make \
+    ninja-build \
+    pkg-config \
+    protobuf-compiler \
+    rsync \
+    screen \
+    shellcheck \
+    tzdata \
+    uncrustify \
+    unzip \
+    xsltproc \
+    zip \
+"
+
+# Development libraries
+DEV_LIBRARIES = " \
     libeigen3-dev \
     libfreetype6-dev \
     libgtest-dev \
@@ -52,16 +64,12 @@ ROS_PACKAGES = "  \
     libopencv-dev \
     libpng-dev \
     libssl-dev \
-    libtool \
     libxml2-utils \
     libyaml-cpp-dev \
-    make \
-    mesa-utils \
-    nethogs \
-    ninja-build \
-    openssh-client \
-    pkg-config \
-    protobuf-compiler \
+"
+
+# Python packages
+PYTHON_PACKAGES = " \
     python3-argcomplete \
     python3-can \
     python3-cerberus \
@@ -91,48 +99,53 @@ ROS_PACKAGES = "  \
     python3-toml \
     python3-vcstool \
     python3-wheel \
+"
+
+# Networking and system utilities
+SYSTEM_UTILS = " \
+    can-utils \
+    htop \
+    iperf \
+    iw \
+    mesa-utils \
+    nethogs \
+    openssh-client \
+    usbutils \
+    v4l-utils \
+    valgrind \
+    vim-common \
+"
+
+# GStreamer packages
+GSTREAMER_PACKAGES = " \
+    gstreamer1.0-nice \
+    gstreamer1.0-opencv \
+"
+
+# ROS 2 message packages (beyond ros-base which includes common-interfaces,
+# tf2-*, rosgraph-msgs, lifecycle-msgs, action-msgs, statistics-msgs, unique-identifier-msgs)
+ROS_MSG_PACKAGES = " \
     ros-${ROS_VERSION}-ackermann-msgs \
-    ros-${ROS_VERSION}-actionlib-msgs \
-    ros-${ROS_VERSION}-action-msgs \
     ros-${ROS_VERSION}-actuator-msgs \
     ros-${ROS_VERSION}-apriltag-msgs \
     ros-${ROS_VERSION}-aruco-msgs \
     ros-${ROS_VERSION}-aruco-opencv-msgs \
-    ros-${ROS_VERSION}-camera-calibration \
-    ros-${ROS_VERSION}-camera-calibration-parsers \
-    ros-${ROS_VERSION}-camera-info-manager \
     ros-${ROS_VERSION}-can-msgs \
     ros-${ROS_VERSION}-cartographer-ros-msgs \
-    ros-${ROS_VERSION}-compressed-image-transport \
     ros-${ROS_VERSION}-controller-manager-msgs \
     ros-${ROS_VERSION}-control-msgs \
-    ros-${ROS_VERSION}-cv-bridge \
-    ros-${ROS_VERSION}-dataspeed-can-msg-filters \
-    ros-${ROS_VERSION}-diagnostic-msgs \
     ros-${ROS_VERSION}-dwb-msgs \
     ros-${ROS_VERSION}-event-camera-msgs \
-    ros-${ROS_VERSION}-foxglove-bridge \
     ros-${ROS_VERSION}-foxglove-msgs \
     ros-${ROS_VERSION}-gazebo-msgs \
     ros-${ROS_VERSION}-geographic-msgs \
-    ros-${ROS_VERSION}-geometry-msgs \
     ros-${ROS_VERSION}-gps-msgs \
     ros-${ROS_VERSION}-graph-msgs \
     ros-${ROS_VERSION}-grid-map-msgs \
-    ros-${ROS_VERSION}-gscam \
-    ros-${ROS_VERSION}-gscam \
-    ros-${ROS_VERSION}-image-pipeline \
-    ros-${ROS_VERSION}-image-tools \
-    ros-${ROS_VERSION}-image-transport \
-    ros-${ROS_VERSION}-image-transport-plugins \
     ros-${ROS_VERSION}-irobot-create-msgs \
-    ros-${ROS_VERSION}-launch-testing-ament-cmake \
-    ros-${ROS_VERSION}-lifecycle-msgs \
     ros-${ROS_VERSION}-map-msgs \
-    ros-${ROS_VERSION}-nav2-bringup \
     ros-${ROS_VERSION}-nav-2d-msgs \
     ros-${ROS_VERSION}-nav2-msgs \
-    ros-${ROS_VERSION}-nav-msgs \
     ros-${ROS_VERSION}-nmea-msgs \
     ros-${ROS_VERSION}-object-recognition-msgs \
     ros-${ROS_VERSION}-octomap-msgs \
@@ -144,58 +157,77 @@ ROS_PACKAGES = "  \
     ros-${ROS_VERSION}-polygon-msgs \
     ros-${ROS_VERSION}-radar-msgs \
     ros-${ROS_VERSION}-rclpy-message-converter-msgs \
-    ros-${ROS_VERSION}-rmw \
-    ros-${ROS_VERSION}-rmw-cyclonedds-cpp \
-    ros-${ROS_VERSION}-rmw-dds-common \
-    ros-${ROS_VERSION}-rmw-implementation \
-    ros-${ROS_VERSION}-rmw-implementation-cmake \
     ros-${ROS_VERSION}-robot-calibration-msgs \
     ros-${ROS_VERSION}-rosapi-msgs \
-    ros-${ROS_VERSION}-ros-base \
     ros-${ROS_VERSION}-rosbridge-msgs \
     ros-${ROS_VERSION}-rosbridge-test-msgs \
-    ros-${ROS_VERSION}-rosgraph-msgs \
-    ros-${ROS_VERSION}-rqt-msg \
     ros-${ROS_VERSION}-rtcm-msgs \
     ros-${ROS_VERSION}-rviz-2d-overlay-msgs \
-    ros-${ROS_VERSION}-sensor-msgs \
-    ros-${ROS_VERSION}-sensor-msgs-py \
-    ros-${ROS_VERSION}-shape-msgs \
-    ros-${ROS_VERSION}-statistics-msgs \
-    ros-${ROS_VERSION}-std-msgs \
-    ros-${ROS_VERSION}-stereo-msgs \
     ros-${ROS_VERSION}-system-modes-msgs \
     ros-${ROS_VERSION}-teleop-tools-msgs \
     ros-${ROS_VERSION}-test-msgs \
-    ros-${ROS_VERSION}-tf2-geometry-msgs \
-    ros-${ROS_VERSION}-tf2-msgs \
-    ros-${ROS_VERSION}-tf2-sensor-msgs \
-    ros-${ROS_VERSION}-topic-tools \
-    ros-${ROS_VERSION}-trajectory-msgs \
     ros-${ROS_VERSION}-twist-mux-msgs \
     ros-${ROS_VERSION}-ublox-msgs \
     ros-${ROS_VERSION}-ublox-ubx-msgs \
     ros-${ROS_VERSION}-udp-msgs \
-    ros-${ROS_VERSION}-unique-identifier-msgs \
-    ros-${ROS_VERSION}-v4l2-camera \
     ros-${ROS_VERSION}-vision-msgs \
     ros-${ROS_VERSION}-vision-msgs-layers \
-    ros-${ROS_VERSION}-vision-msgs-rviz-plugins \
-    ros-${ROS_VERSION}-vision-opencv \
-    ros-${ROS_VERSION}-visualization-msgs \
+"
+
+# ROS 2 core and tools (ros-base includes rmw, rmw-dds-common,
+# rmw-implementation, rmw-implementation-cmake, launch-testing-ament-cmake)
+ROS_CORE_PACKAGES = " \
+    ros-${ROS_VERSION}-ros-base \
+    ros-${ROS_VERSION}-rmw-cyclonedds-cpp \
+    ros-${ROS_VERSION}-rmw-zenoh-cpp \
+    ros-${ROS_VERSION}-topic-tools \
     ros-dev-tools \
-    rsync \
-    screen \
-    shellcheck \
-    tzdata \
-    uncrustify \
-    unzip \
-    usbutils \
-    v4l-utils \
-    valgrind \
-    vim-common \
-    xsltproc \
-    zip \
+"
+
+# ROS 2 image/camera packages
+ROS_IMAGE_PACKAGES = " \
+    ros-${ROS_VERSION}-camera-calibration \
+    ros-${ROS_VERSION}-camera-calibration-parsers \
+    ros-${ROS_VERSION}-camera-info-manager \
+    ros-${ROS_VERSION}-compressed-image-transport \
+    ros-${ROS_VERSION}-cv-bridge \
+    ros-${ROS_VERSION}-gscam \
+    ros-${ROS_VERSION}-image-pipeline \
+    ros-${ROS_VERSION}-image-tools \
+    ros-${ROS_VERSION}-image-transport \
+    ros-${ROS_VERSION}-image-transport-plugins \
+    ros-${ROS_VERSION}-v4l2-camera \
+    ros-${ROS_VERSION}-vision-opencv \
+"
+
+# ROS 2 navigation
+ROS_NAV_PACKAGES = " \
+    ros-${ROS_VERSION}-nav2-bringup \
+"
+
+# ROS 2 CAN packages
+ROS_CAN_PACKAGES = " \
+    ros-${ROS_VERSION}-dataspeed-can-msg-filters \
+"
+
+# ROS 2 Qt-based packages (pulls in Qt5 dependencies)
+# Uncomment if you need rqt tools or rviz plugins
+# ROS_QT_PACKAGES = " \
+#     ros-${ROS_VERSION}-rqt-msg \
+#     ros-${ROS_VERSION}-vision-msgs-rviz-plugins \
+# "
+
+ROS_PACKAGES = " \
+    ${BUILD_TOOLS} \
+    ${DEV_LIBRARIES} \
+    ${PYTHON_PACKAGES} \
+    ${SYSTEM_UTILS} \
+    ${GSTREAMER_PACKAGES} \
+    ${ROS_CORE_PACKAGES} \
+    ${ROS_MSG_PACKAGES} \
+    ${ROS_IMAGE_PACKAGES} \
+    ${ROS_NAV_PACKAGES} \
+    ${ROS_CAN_PACKAGES} \
 "
 
 PYTHON_ROSDEP_PACKAGE = "${@bb.utils.contains('ROS_VERSION', 'jazzy', 'python3-rosdep', 'python3-rosdep', d)}"
