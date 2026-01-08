@@ -608,7 +608,8 @@ END_USER
 			if [ -z "`cat ${APTGET_CHROOT_DIR}/etc/passwd | grep $user_name`" ]; then
                                 chroot "${APTGET_CHROOT_DIR}" /usr/sbin/groupadd render
                                 chroot "${APTGET_CHROOT_DIR}" /usr/sbin/groupadd input
-				chroot "${APTGET_CHROOT_DIR}" /usr/sbin/useradd -p "$user_passwd" -U -G sudo,users,video,render,audio,dialout -m "$user_name" $user_shell_opt
+                                chroot "${APTGET_CHROOT_DIR}" /usr/sbin/groupadd -f bluetooth
+				chroot "${APTGET_CHROOT_DIR}" /usr/sbin/useradd -p "$user_passwd" -U -G sudo,users,video,render,audio,dialout,bluetooth -m "$user_name" $user_shell_opt
 			fi
 
 		done
