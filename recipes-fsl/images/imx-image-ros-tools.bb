@@ -132,7 +132,6 @@ NETWORK_PACKAGES = " \
     bluez \
     python-is-python3 \
     netplan.io \
-    network-manager \
 "
 
 APTGET_EXTRA_PACKAGES_LAST += " \
