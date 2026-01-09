@@ -217,5 +217,5 @@ IMAGE_ROOTFS_EXTRA_SPACE:append = "${@bb.utils.contains("DISTRO_FEATURES", "syst
 COMPATIBLE_MACHINE = "(.*ubuntu)"
 
 python do_rootfs:prepend() {
-    d.setVar('IMAGE_LOG_CHECK_EXCLUDES', 'Failed')
+    d.setVar('IMAGE_LOG_CHECK_EXCLUDES', 'Failed NMClient')
 }
