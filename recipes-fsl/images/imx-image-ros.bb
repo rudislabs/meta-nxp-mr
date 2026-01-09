@@ -244,3 +244,21 @@ fakeroot do_install_home_files() {
     install -m 0644 ${CUSTOM_FILES_PATH}/release ${IMAGE_ROOTFS}${sysconfdir}/
     chmod 755 ${APTGET_CHROOT_DIR}/home/user/install_cognipilot.sh
 }
+
+# Install WiFi configuration after rootfs is built to avoid NetworkManager reload errors
+ROOTFS_POSTPROCESS_COMMAND += "install_wifi_config;"
+
+install_wifi_config() {
+\t# Install NetworkManager config to disable WiFi by default
+\t# This is done in postprocess to avoid triggering NetworkManager during apt install
+\tinstall -d ${IMAGE_ROOTFS}/etc/NetworkManager/conf.d
+\tcat > ${IMAGE_ROOTFS}/etc/NetworkManager/conf.d/99-wifi-unmanaged.conf << 'EOFWIFI'
+# NetworkManager config to not manage WiFi interfaces by default
+# This prevents auto-scanning on boot
+# To enable WiFi: sudo nmcli dev set mlan0 managed yes
+[device-wifi-unmanaged]
+match-device=interface-name:mlan0;interface-name:uap0;interface-name:wfd0
+managed=0
+EOFWIFI
+\tchmod 0644 ${IMAGE_ROOTFS}/etc/NetworkManager/conf.d/99-wifi-unmanaged.conf
+}
